@@ -31,9 +31,9 @@ models = {
         subsample=0.8, colsample_bytree=0.8, random_state=42
     ),
     "XGBoostOpt": XGBRegressor(
-        n_estimators=3507, learning_rate=0.0014745879680925467, max_depth=7,
-        subsample=0.615911450697554, colsample_bytree=0.5, gamma=0.8321866393331198, min_child_weight=29.999999999999996,
-        reg_alpha=3.0255484731396004e-06, reg_lambda=0.001
+        n_estimators=3507, learning_rate=0.00148, max_depth=7,
+        subsample=0.616, colsample_bytree=0.5, gamma=0.832, min_child_weight=30.0,
+        reg_alpha=3.026e-06, reg_lambda=0.001
     ),
 }
 
