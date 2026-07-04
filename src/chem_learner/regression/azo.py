@@ -10,8 +10,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.ensemble import RandomForestRegressor
 from xgboost import XGBRegressor
-from descriptors.RDKit_Descriptor import load_azo_dataset
-from descriptors.feature_correlation import get_top_features
+from src.chem_learner.descriptors.RDKit_Descriptor import load_azo_dataset
+from src.chem_learner.descriptors.feature_correlation import get_top_features
 
 # Data
 X, y = load_azo_dataset()

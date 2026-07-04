@@ -8,7 +8,7 @@ Description: Filter RDKit features by correlation with target.
 import numpy as np
 import pandas as pd
 from scipy.stats import spearmanr
-from descriptors.RDKit_Descriptor import load_azo_dataset
+from src.chem_learner.descriptors.RDKit_Descriptor import load_azo_dataset
 
 
 def get_top_features(
