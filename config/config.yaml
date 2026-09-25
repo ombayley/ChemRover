@@ -1,0 +1,20 @@
+# ---------------------------------------------------------------------------
+# Root config. `uv run nn-train` with no arguments runs exactly this.
+#
+# The list below picks one option from each config group. Override any of them
+# on the command line (`model=cnn`), override individual fields with dotted
+# paths (`model.hidden_size=256`), or select a whole named experiment
+# (`experiment=mnist_fnn`).
+#
+# `base_config` is the typed schema in src/neuralnetworks/config.py: it is what
+# turns a typo in this file into an error at start-up rather than a surprise
+# forty seconds into a run.
+# ---------------------------------------------------------------------------
+# configs/config.yaml
+defaults:
+  - model: xgb
+  - data: abs
+  - trainer: optuna
+  - _self_
+
+

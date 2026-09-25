@@ -1,0 +1,6 @@
+kf_n_splits: 5,
+kf_shuffle: True,
+kf_random_state: 42
+save_path: C:\Users\ollyb\Documents_Local\Code\ChemRover\logs
+n_jobs: -1
+show_progress_bar: True

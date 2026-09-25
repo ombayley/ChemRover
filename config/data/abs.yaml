@@ -1,0 +1,10 @@
+name: absorption
+path: C:\Users\ollyb\Documents_Local\Code\ChemRover\data\raw
+subset: 4
+features: [lambda, SMILES, solvent]
+target: [lambda]
+categorical_features: [solvent]
+test_size: 0.15
+val_size: 0.10
+seed: 42
+encoding: rdkit
