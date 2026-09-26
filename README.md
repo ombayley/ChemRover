@@ -20,7 +20,7 @@ Once these effects are understood, the same pipeline will be applied to **therma
 Requires Python 3.13 and [uv](https://docs.astral.sh/uv/).
 
 ```bash
-git clone https://github.com/<your-username>/ChemRover.git
+git clone https://github.com/ombayley/ChemRover.git
 cd ChemRover
 uv sync            # creates .venv and installs chemrover (editable) plus the dev tools
 ```
@@ -190,6 +190,51 @@ Raw CSVs live in `data/raw/`. The `data.subset` setting chooses between them:
 
 > Note: set 4 contains repeated molecules (1,363 rows, 1,239 unique structures), so a random split
 > can place the same molecule in both train and val.
+
+---
+
+## Results
+
+>Dataset split into 700 train / 93 test (hyper-parameter tuning) / 141 val (final benchmark)
+
+Currently, the model predictions are very good with most models providing r2 >0.9. XGB appears to edge out the competition 
+when assessed over multiple runs with varying datasets, however XGB, SVM, RF, GPs and KNNs all provide predictions that 
+are roughly within the margin of error of each-other, making it difficult to establish a single clear winner. 
+MLP and PLS both underperform compared to the other models which is expected for a small dataset with non-linear responses.
+
+![all_models_direct_comparison.png](reports/assets/all_models_direct_comparison.png)
+
+![top_models_learning_curve_overlay.png](reports/assets/top_models_learning_curve_overlay.png)
+
+see the [Absorbance Results](reports/abs_results.md) file for more details and rough summary of the prediction of the azobenzene 
+absorbanmce bands.
+
+---
+
+## Road Map
+
+### 1. Encoding Sweep
+Having seen the absorbances can be rather accurately predicted from the RDkit FP encoded structures, I want to sweep
+a variety of different molecular encoders to test the effect.
+
+[scikit-fingerprint](https://github.com/MLCIL/scikit-fingerprints) provides a large range of chemical encoders so will 
+do the sweep using this library. Need to solve numpy, pandas and rdkit dependency clash as the scikit-fp pkg uses 
+some old versions as dependencies.
+
+### 2. Data Examination
+
+Based on the parity plots there appear to be some data points are consistently the more difficult to predict 
+for multiple models. Want to add outlier detection to flag consistent outlier datapoints for further investigation
+
+### 3. Feature Space Examination
+
+Want to implement feature space examination (K-Means Clustering, UMAP and PCA) to identify the current 
+feature space coverage.
+
+### 4. Thermal Relaxation
+
+Once the accuracy of the absorbance models is at its max from the current assessments will shift to use the same 
+pipeline to examine the thermal relaxation rates.
 
 ---
 
