@@ -1,0 +1,15 @@
+# Random forest (sklearn RandomForestRegressor). Select with `model=rf`.
+# Everything except `_target_`, `name`, `load_from` and `scale_*` is passed to the regressor.
+# Params listed in RF.PARAM_LIMS (models/rf.py) are replaced by Optuna's best values when tuning.
+_target_: chemrover.models.rf.RF
+name: absorbance_rf          # used for the saved model file and the Optuna study name
+load_from: null              # path to a saved model .joblib to reuse instead of tuning/training
+scale_features: false        # trees are scale-invariant
+scale_target: false
+n_estimators: 500
+max_depth: null              # null = grow until leaves are pure
+min_samples_split: 2
+min_samples_leaf: 1
+max_features: 1.0
+n_jobs: 1                    # keep at 1: Optuna runs trials in parallel instead
+random_state: 42
