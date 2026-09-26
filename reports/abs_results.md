@@ -21,7 +21,7 @@ The model was refitted over 5 different split seeds to check how much the result
 
 ## 2. Solvent vs no solvent
 
-![Parity plots with and without solvent](assets/solvent_effect.png)
+![Parity plots with and without solvent](assets/xgb_solvent comparison.png)
 
 | Features | RMSE / nm | MAE / nm | R² |
 |---|---:|---:|---:|
@@ -37,7 +37,7 @@ The model was refitted over 5 different split seeds to check how much the result
 
 XGBoost model with RDKit descriptors on the largest (combined) dataset. Mean ± 1 std over the split seeds.
 
-![Learning curve with and without solvent](assets/learning_curve_by_solvent.png)
+![Learning curve with and without solvent](assets/xgb_learning_curve_wsolvent_and_splits.png)
 
 | Training molecules | RMSE / nm, no solvent | RMSE / nm, with solvent | MAE / nm, no solvent | MAE / nm, with solvent | R², no solvent | R², with solvent |
 |---:|---:|---:|---:|---:|---:|---:|
@@ -56,7 +56,7 @@ XGBoost model with RDKit descriptors on the largest (combined) dataset. Mean ± 
 
 ## 4. Comparison of model architectures
 
-![Parity plots for each model](assets/model_comparisons.png)
+![Parity plots for each model](assets/all_models_direct_comparison.png)
 
 | Model | RMSE / nm | MAE / nm | R² |
 |---|---:|---:|---:|
@@ -89,9 +89,9 @@ XGBoost model with RDKit descriptors on the largest (combined) dataset. Mean ± 
 
 Each model was refitted at 7 training-set sizes over 3 split seeds. Values are mean ± 1 sd over the splits.
 
-![Learning curves for all models](assets/model_comparison_by_data.png)
+![Learning curves for all models](assets/top_models_learning_curve_overlay.png)
 
-![Val RMSE per model, mean ± 1 sd band](assets/model_resplit_by_data_size.png)
+![Val RMSE per model, mean ± 1 sd band](assets/top_models_learning_curve_with_splits.png)
 
 **Val RMSE / nm by training-set size**
 
