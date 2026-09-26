@@ -1,20 +1,28 @@
 # ---------------------------------------------------------------------------
-# Root config. `uv run nn-train` with no arguments runs exactly this.
+# Root config. `uv run chemrover` with no arguments runs exactly this.
 #
-# The list below picks one option from each config group. Override any of them
-# on the command line (`model=cnn`), override individual fields with dotted
-# paths (`model.hidden_size=256`), or select a whole named experiment
-# (`experiment=mnist_fnn`).
-#
-# `base_config` is the typed schema in src/neuralnetworks/config.py: it is what
-# turns a typo in this file into an error at start-up rather than a surprise
-# forty seconds into a run.
+# Each entry in `defaults` picks one file from the matching config folder.
+# Override any field on the command line with a dotted path, e.g.
+#   uv run chemrover data.subset=2
+#   uv run chemrover trainer.n_trials=20
+#   uv run chemrover "data.features=[lambda,SMILES]"      # drop solvent
 # ---------------------------------------------------------------------------
-# configs/config.yaml
 defaults:
   - model: xgb
   - data: abs
   - trainer: optuna
   - _self_
 
+# All paths are resolved relative to the repo root, so the configs work on any machine.
+paths:
+  root: ${project_root:}
+  data: ${paths.root}/data/raw
+  outputs: ${paths.root}/outputs
 
+# Each run writes its log, resolved config, saved model and parity plot here.
+hydra:
+  run:
+    dir: ${paths.outputs}/${now:%Y-%m-%d}/${now:%H-%M-%S}
+  sweep:
+    dir: ${paths.outputs}/multirun/${now:%Y-%m-%d}/${now:%H-%M-%S}
+    subdir: ${hydra.job.num}
