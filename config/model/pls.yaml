@@ -1,0 +1,9 @@
+# Partial least squares regression (sklearn PLSRegression). Select with `model=pls`.
+# Everything except `_target_`, `name`, `load_from` and `scale_*` is passed to the regressor.
+# Params listed in PLS.PARAM_LIMS (models/pls.py) are replaced by Optuna's best values when tuning.
+_target_: chemrover.models.pls.PLS
+name: absorbance_pls         # used for the saved model file and the Optuna study name
+load_from: null              # path to a saved model .joblib to reuse instead of tuning/training
+scale_features: true         # latent components are driven by variance, so features need comparable scales
+scale_target: false
+n_components: 5
