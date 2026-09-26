@@ -1,6 +1,5 @@
-kf_n_splits: 5,
-kf_shuffle: True,
-kf_random_state: 42
-save_path: C:\Users\ollyb\Documents_Local\Code\ChemRover\logs
-n_jobs: -1
+# Optuna hyper-parameter search.
+study_dir: ${paths.outputs}/optuna   # SQLite study files; a study resumes if the same data+model config is re-run
+n_jobs: -1                           # parallel trials (-1 = all cores)
 show_progress_bar: True
+n_trials: 100                        # total trials per study (already-completed trials count towards this)
