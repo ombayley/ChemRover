@@ -205,3 +205,10 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# ChemRover run outputs (Hydra run folders, Optuna studies, saved models)
+outputs/
+
+# Claude
+claude.md
+.claude/
