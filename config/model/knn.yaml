@@ -1,0 +1,12 @@
+# k-nearest neighbours (sklearn KNeighborsRegressor). Select with `model=knn`.
+# Everything except `_target_`, `name`, `load_from` and `scale_*` is passed to the regressor.
+# Params listed in KNN.PARAM_LIMS (models/knn.py) are replaced by Optuna's best values when tuning.
+_target_: chemrover.models.knn.KNN
+name: absorbance_knn         # used for the saved model file and the Optuna study name
+load_from: null              # path to a saved model .joblib to reuse instead of tuning/training
+scale_features: true         # distances need comparable feature scales
+scale_target: false
+n_neighbors: 5
+weights: distance
+p: 2
+n_jobs: 1                    # keep at 1: Optuna runs trials in parallel instead
