@@ -1,0 +1,13 @@
+# Support vector regression (sklearn SVR). Select with `model=svm`.
+# Everything except `_target_`, `name`, `load_from` and `scale_*` is passed to the regressor.
+# Params listed in SVM.PARAM_LIMS (models/svm.py) are replaced by Optuna's best values when tuning.
+_target_: chemrover.models.svm.SVM
+name: absorbance_svm         # used for the saved model file and the Optuna study name
+load_from: null              # path to a saved model .joblib to reuse instead of tuning/training
+scale_features: true         # SVR kernels need comparable feature scales
+scale_target: true           # fit on standardised lambda, so epsilon is in units of std(lambda)
+kernel: rbf
+C: 10.0
+epsilon: 0.1
+gamma: scale
+cache_size: 500              # kernel cache (MB); speeds up fitting
