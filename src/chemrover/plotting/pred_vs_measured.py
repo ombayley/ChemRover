@@ -179,9 +179,9 @@ def plot_parity(
         ax.plot(edge, edge, ls="--", lw=1.2, color=_GUIDE, zorder=1)
 
         if grid:
-            ax_r.grid(grid, color="#E3E6E8", lw=0.7, zorder=0)
+            ax.grid(grid, color="#E3E6E8", lw=0.7, zorder=0)
         else:
-            ax_r.grid(grid)
+            ax.grid(grid)
         ax.set_axisbelow(True)
 
         if color_by_error:
@@ -282,6 +282,55 @@ def plot_parity(
                 plt.show()
 
     return fig, ax, ax_r, stats
+
+
+def plot_parity_grid(
+        panels: dict[str, tuple[Sequence[float], Sequence[float]]],
+        *,
+        ncols: int = 2,
+        panel_size: Optional[tuple[float, float]] = None,
+        title: Optional[str] = None,
+        save_path: Optional[str] = None,
+        dpi: int = 200,
+        **kwargs,
+):
+    """
+    Tile several parity plots into one figure (one SubFigure per panel).
+
+    Parameters
+    ----------
+    panels : dict
+        {panel title: (y_true, y_pred)}, drawn in insertion order.
+    ncols : int
+        Number of panels per row.
+    panel_size : (width, height), optional
+        Size of each panel in inches. Defaults to the standalone plot_parity
+        size (shorter when ``show_residuals=False``).
+    title : str, optional
+        Figure-level title.
+    save_path : str, optional
+        If given, write the figure here at ``dpi``.
+    **kwargs
+        Passed to ``plot_parity`` for every panel (e.g. ``show_residuals=False``).
+
+    Returns
+    -------
+    fig : the parent Figure
+    """
+    if panel_size is None:
+        panel_size = (6.4, 7.2) if kwargs.get("show_residuals", True) else (6.4, 6.0)
+    n = len(panels)
+    nrows = max(1, -(-n // ncols))  # ceil division
+    ncols = min(ncols, n) if n else 1
+    fig = plt.figure(figsize=(panel_size[0] * ncols, panel_size[1] * nrows), facecolor="white")
+    subfigs = np.atleast_1d(fig.subfigures(nrows, ncols, wspace=0.03, hspace=0.03)).ravel()
+    for sfig, (label, (y_true, y_pred)) in zip(subfigs, panels.items()):
+        plot_parity(y_true, y_pred, title=label, target_fig=sfig, **kwargs)
+    if title:
+        fig.suptitle(title, fontsize=16, fontweight="bold", color="black")
+    if save_path:
+        fig.savefig(save_path, dpi=dpi, facecolor="white")
+    return fig
 
 
 if __name__ == "__main__":
