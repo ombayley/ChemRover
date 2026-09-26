@@ -1,0 +1,8 @@
+# Baseline: always predicts the training mean (sklearn DummyRegressor). Select with `model=dummy`.
+# Nothing is tuned; every real model should beat this (test R2 ~ 0).
+_target_: chemrover.models.dummy.Dummy
+name: absorbance_dummy       # used for the saved model file
+load_from: null              # path to a saved model .joblib to reuse
+scale_features: false
+scale_target: false
+strategy: mean               # mean | median
