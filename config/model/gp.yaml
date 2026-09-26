@@ -1,0 +1,12 @@
+# Gaussian process regression (sklearn GaussianProcessRegressor). Select with `model=gp`.
+# No Optuna search: the kernel's amplitude, length scale and noise are fitted by marginal likelihood.
+# Everything except `_target_`, `name`, `load_from`, `scale_*` and `kernel` is passed to the regressor.
+_target_: chemrover.models.gp.GP
+name: absorbance_gp          # used for the saved model file
+load_from: null              # path to a saved model .joblib to reuse instead of training
+scale_features: true         # one shared length scale needs comparable feature scales
+scale_target: false          # normalize_y below already standardises the target
+kernel: matern52             # rbf | matern32 | matern52 | rq (each x amplitude + white noise)
+normalize_y: true
+n_restarts_optimizer: 3      # extra random starts for the kernel fit (more = slower, fewer bad optima)
+random_state: 42
