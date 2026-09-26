@@ -5,4 +5,3 @@ Author: O. Bayley
 Description: Publication-style plots (parity plots, chemical-space embeddings).
 """
 from .pred_vs_measured import plot_parity, plot_parity_grid
-from .embedding import plot_embedding

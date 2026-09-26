@@ -21,7 +21,7 @@ The model was refitted over 5 different split seeds to check how much the result
 
 ## 2. Solvent vs no solvent
 
-![Parity plots with and without solvent](assets/xgb_solvent comparison.png)
+![Parity plots with and without solvent](assets/xgb_solvent_comparison.png)
 
 | Features | RMSE / nm | MAE / nm | R² |
 |---|---:|---:|---:|
