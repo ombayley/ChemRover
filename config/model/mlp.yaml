@@ -1,0 +1,17 @@
+# Multi-layer perceptron (sklearn MLPRegressor). Select with `model=mlp`.
+# Everything except `_target_`, `name`, `load_from`, `scale_*`, `n_layers` and `n_units` is passed to the regressor.
+# Params listed in MLP.PARAM_LIMS (models/mlp.py) are replaced by Optuna's best values when tuning.
+_target_: chemrover.models.mlp.MLP
+name: absorbance_mlp         # used for the saved model file and the Optuna study name
+load_from: null              # path to a saved model .joblib to reuse instead of tuning/training
+scale_features: true         # neural nets need comparable feature scales
+scale_target: true           # train on standardised lambda for stable gradients
+n_layers: 2                  # hidden layers (network shape = n_layers x n_units)
+n_units: 64                  # neurons per hidden layer
+alpha: 1.0e-4                # L2 regularisation
+learning_rate_init: 1.0e-3
+activation: relu
+solver: adam
+max_iter: 2000
+early_stopping: true         # stop when a 10% slice of the training split stops improving
+random_state: 42
