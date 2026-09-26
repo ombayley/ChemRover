@@ -2,6 +2,6 @@
 # -*- coding: utf-8 -*-
 """
 Author: O. Bayley
-Description: **Add Desc**.
+Description: Model training / hyper-parameter optimisation.
 """
-from optim_hp import optimise_hyper_params
+from .optim_hp import optimise_hyper_params
