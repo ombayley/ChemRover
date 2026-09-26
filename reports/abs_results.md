@@ -123,12 +123,16 @@ Each model was refitted at 7 training-set sizes over 3 split seeds. Values are m
 - **Full data:** XGBoost, GP and random forest are within 1 sd of each other at 700 molecules. SVM and KNN are about 4 nm worse.
 - **Ranking changes from section 4:** Averaged over 3 splits, KNN drops from 2nd to 5th, and every model does worse than on the single seed-42 split (e.g. GP 22.8 vs 17.0 nm). This supports the earlier finding that seed 42 is a favourable split.
 - **Still improving:** Every stable model is still improving at 700 molecules, the same as in section 3.
-- **PLS and MLP are unstable** below 700 molecules, and MLP is unstable even at 700. This looks like a fitting problem rather than a real result (e.g. feature scaling, or descriptors with extreme values). Fix it before drawing conclusions about these two models.
+- **PLS and MLP are unstable** below 700 molecules, and MLP is unstable even at 700. This looks like a fitting problem rather than a real result (e.g. feature scaling, or descriptors with extreme values).
 - The five stable models stay within about 4–5 nm of each other at every size.
 - RDkit FP may be such a strong indicator of absorbance that model selection is not be heavily impactful 
+
+> Extreme value ranges of the RDKit descriptors (e.g. [Ipc values can baloon](https://github.com/rdkit/rdkit/issues/1527))
+may be causing issues with the MLP and PLS and may need trimming. Can be done in scikit-fingerprints with 'clip_val' so
+will test this once sk-fp is installed.
 
 ---
 
 ## 6. differences in encoding
 
-*To do.*
+*In Progress...*
