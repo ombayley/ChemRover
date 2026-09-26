@@ -1,6 +1,7 @@
 # ChemRover
 
-> Machine-learning predictors for azobenzene photoswitch properties.
+> Machine-learning predictors for azobenzene photoswitch properties. Built to be paired with the ChemKlipper repo
+> as a part of a 2026 Marsden Grant Proposal. 
 
 ChemRover predicts the absorbance maximum (λ<sub>max</sub>) of azobenzenes from their structure
 (SMILES) and measurement context (e.g. solvent). It is built to compare how prediction accuracy
@@ -134,7 +135,7 @@ src/chemrover/
 │   └── rf.py, svm.py, knn.py, gp.py, pls.py, mlp.py, dummy.py
 ├── trainer/optim_hp.py # model-agnostic Optuna tuning on the test split
 ├── plotting/           # parity plots, parity grids (and chemical-space embeddings)
-└── util/logger.py
+└── util/setup_logging.py
 ```
 
 ## Extending
@@ -171,7 +172,7 @@ kernel with `model.kernel=rbf|matern32|matern52|rq`). A model whose config value
 before reaching sklearn (e.g. the GP's kernel name, the MLP's `n_layers` x `n_units`) overrides `_estimator()`.
 
 **Any other library:** subclass `ModelBase` directly, as `models/xgb.py` does. Implement
-`fit(X, y, X_val=None, y_val=None)`, `predict`, `score`, `clone`, `save`, `load` and `set_params`, plus
+`X_test, y_test`, `predict`, `score`, `clone`, `save`, `load` and `set_params`, plus
 the `name`, `PARAM_LIMS` and `FIXED_PARAMS` properties.
 
 ---
@@ -207,7 +208,7 @@ MLP and PLS both underperform compared to the other models which is expected for
 ![top_models_learning_curve_overlay.png](reports/assets/top_models_learning_curve_overlay.png)
 
 see the [Absorbance Results](reports/abs_results.md) file for more details and rough summary of the prediction of the azobenzene 
-absorbanmce bands.
+absorbance bands.
 
 ---
 
