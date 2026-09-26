@@ -1,10 +1,15 @@
+# Absorbance (lambda_max) prediction dataset.
 name: absorption
-path: C:\Users\ollyb\Documents_Local\Code\ChemRover\data\raw
-subset: 4
-features: [lambda, SMILES, solvent]
-target: [lambda]
-categorical_features: [solvent]
-test_size: 0.15
-val_size: 0.10
-seed: 42
-encoding: rdkit
+path: ${paths.data}                  # folder holding the raw CSVs
+subset: 4                            # 1 Byadi 2025 | 2 Griffiths 2022 | 3 PCCP 2007 | 4 combined
+features: [lambda, SMILES, solvent]  # columns used by the model (case-insensitive)
+required: [lambda, SMILES, solvent]  # rows missing any of these are dropped, whatever `features` is, so feature sets are compared on the same rows
+max_samples: null                    # keep at most this many rows (random, seeded), e.g. to compare datasets at equal size
+train_fraction: 1.0                  # use only this fraction of the training split (test/val unchanged), for learning curves
+target: lambda                       # regression target column
+categorical_features: [solvent]      # converted to pandas 'category' dtype (used natively by XGBoost)
+test_size: 0.10                      # fraction of all rows used for hyper-parameter tuning / early stopping
+val_size: 0.15                       # fraction of all rows held out for the final benchmark (metrics + parity plot)
+seed: 42                             # random seed for the splits
+encoding: rdkit                      # SMILES encoding method (see chemrover.descriptors)
+coverage_thresh: 0.9                 # drop descriptors that are non-NaN for less than this fraction of molecules
